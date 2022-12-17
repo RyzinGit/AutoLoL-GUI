@@ -7,23 +7,28 @@ from tkinter import *
 import configparser
 import sys
 
-
+lowRes = "1280x720"
+highRes = "1600x900"
 currentDir = os.getcwd()
-acceptPhoto = os.path.join(currentDir, "data\\acceptButton.png")
-searchPhoto = os.path.join(currentDir, "data\searchButton.png")
-normalRyzePhoto = os.path.join(currentDir, "data\\normalRyze.png")
-grayRyzePhoto = os.path.join(currentDir, "data\grayRyze.png")
-grayLockinPhoto = os.path.join(currentDir, "data\grayLockin.png")
-blueLockinPhoto = os.path.join(currentDir, "data\\blueLockin.png")
-redBanPhoto = os.path.join(currentDir, "data\\redBan.png")
-grayBanPhoto = os.path.join(currentDir, "data\grayBan.png")
-runePhoto = os.path.join(currentDir, "data\\runePhoto.png")
-flashPhoto = os.path.join(currentDir, "data\\flashPhoto.png")
-ignitePhoto = os.path.join(currentDir, "data\ignitePhoto.png")
-saveNormalPhoto = os.path.join(currentDir, "data\\saveNormal.png")
-saveGrayPhoto = os.path.join(currentDir, "data\saveGray.png")
-exitButtonPhoto = os.path.join(currentDir, "data\exitButton.png")
-icon = os.path.join(currentDir, "data\LoLicon.ico")
+
+def SelectResolution(res):
+    global acceptPhoto,searchPhoto,normalRyzePhoto,grayRyzePhoto,grayLockinPhoto,blueLockinPhoto,redBanPhoto,grayBanPhoto,runePhoto,flashPhoto,ignitePhoto,saveNormalPhoto,saveGrayPhoto,exitButtonPhoto
+    acceptPhoto = os.path.join(currentDir, "data", res, "acceptButton.png")
+    searchPhoto = os.path.join(currentDir,"data", res, "searchButton.png")
+    normalRyzePhoto = os.path.join(currentDir, "data", res, "normalRyze.png")
+    grayRyzePhoto = os.path.join(currentDir,"data", res, "grayRyze.png")
+    grayLockinPhoto = os.path.join(currentDir,"data", res, "grayLockin.png")
+    blueLockinPhoto = os.path.join(currentDir, "data", res, "blueLockin.png")
+    redBanPhoto = os.path.join(currentDir, "data", res, "redBan.png")
+    grayBanPhoto = os.path.join(currentDir,"data", res, "grayBan.png")
+    runePhoto = os.path.join(currentDir, "data", res, "runePhoto.png")
+    flashPhoto = os.path.join(currentDir, "data", res, "flashPhoto.png")
+    ignitePhoto = os.path.join(currentDir,"data", res, "ignitePhoto.png")
+    saveNormalPhoto = os.path.join(currentDir, "data", res, "saveNormal.png")
+    saveGrayPhoto = os.path.join(currentDir,"data", res, "saveGray.png")
+    exitButtonPhoto = os.path.join(currentDir,"data", res, "exitButton.png")
+
+icon = os.path.join(currentDir, "data", "LoLicon.ico")
 
 status = "Not active"
 champList = []
@@ -47,10 +52,7 @@ def Status_GUI():
     statusText.pack( ipadx = 5, ipady = 5)
     statusLabel = Label(status_root,text = status,font = ('Ariel', 15, 'bold'))
 
-    if(status == "Not active"):
-        statusLabel.config(fg= "Red")
-    else:
-        statusLabel.config(fg= "Green")
+
     
     statusLabel.pack(  ipadx = 5, ipady = 5)
     exitButton = Button(status_root, text ="Exit", command = terminate)
@@ -63,6 +65,10 @@ def Status_GUI():
         status_root.after(100, update_label)
 
     update_label()
+    if(status == "Not active"):
+        statusLabel.config(fg= "Red")
+    else:
+        statusLabel.config(fg= "Green")
     status_root.mainloop()
 
 def GUI_Func():
@@ -121,6 +127,10 @@ def GUI_Func():
         config.set("BAN", "ban3", "")
         config.set("BAN", "ban4", "")
         config.set("BAN", "ban5", "")
+    if not config.has_section("RESOLUTION"):
+        config.add_section("RESOLUTION")
+        config.set("RESOLUTION", "Resolution", "1600x900")
+        
 
         
     with open("config.ini", 'w') as configfile:
@@ -218,12 +228,20 @@ def GUI_Func():
             config['BAN']['ban3'] = ban3.get()
             config['BAN']['ban4'] = ban4.get()
             config['BAN']['ban5'] = ban5.get()
+
+            config["RESOLUTION"]["Resolution"] = resChoice.get()
+            SelectResolution(resChoice.get())
+            print(resChoice.get())
             
+            
+
             config.write(configfile)
 
         pickGUI_root.destroy()
 
-
+    resolutions = [lowRes,highRes]
+    resChoice = StringVar()
+    resChoice.set("1600x900")
         
     Label(left_frame, text="Champion Pick Preferance").grid(row=0, column=0, padx=5, pady=5)
     Label(left_frame, text="Auto Rune").grid(row=0, column=1, padx=5, pady=5)
@@ -245,8 +263,8 @@ def GUI_Func():
     Entry(right_frame, textvariable = ban4).grid(row=4, column=0, padx=5, pady=5)
     Entry(right_frame, textvariable = ban5).grid(row=5, column=0, padx=5, pady=5)
 
-    Button(bottom_frame, text ="Confirm", command = SaveData).grid(row=0, column=0, padx=5, pady=5)
-
+    OptionMenu(bottom_frame, resChoice, *resolutions).grid(row=0, column=0, padx=5, pady=5)
+    Button(bottom_frame, text ="Confirm", command = SaveData).grid(row=0, column=1, padx=5, pady=5)
     pickGUI_root.protocol('WM_DELETE_WINDOW', terminate)
 
     pickGUI_root.mainloop()
@@ -479,7 +497,7 @@ def AutoRuneFunc():
                     pyautogui.click()
                     sys.exit()
 
-
+SelectResolution("1600x900")
 GUI_Func()
 threading.Thread(target=Status_GUI,name="Status_GUI_Thread").start()
 threading.Thread(target=AcceptGameListener ,name="AcceptGameListener_Thread").start()
