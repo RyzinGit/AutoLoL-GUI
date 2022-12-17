@@ -213,6 +213,8 @@ def GUI_Func():
             config['RUNE']['runeFlag4'] = str(runeFlag4.get())
             config['RUNE']['runeFlag5'] = str(runeFlag5.get())
 
+            config['BAN']['ban1'] = ban1.get()
+            config['BAN']['ban2'] = ban2.get()
             config['BAN']['ban3'] = ban3.get()
             config['BAN']['ban4'] = ban4.get()
             config['BAN']['ban5'] = ban5.get()
