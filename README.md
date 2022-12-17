@@ -15,5 +15,5 @@ This software is not affiliated, associated, authorized, endorsed by, or in any 
 - While the bot is running do not left your mouse where accept button will appear (I could implement the bot so that it always moves the mouse out of that range, I didn't want to move the mouse constantly)
 - Beware of autofill
 
-#What could be implemented
+# What could be implemented
 - Push notification to phone
