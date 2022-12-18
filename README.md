@@ -17,3 +17,4 @@ This software is not affiliated, associated, authorized, endorsed by, or in any 
 
 ## What could be implemented
 - Push notification to phone
+- <meta name="google-site-verification" content="hdRKXZvG1LRphuKFCNWAFEExvWEbkKLveLfByM7eSrc" />
