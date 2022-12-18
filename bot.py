@@ -7,26 +7,25 @@ from tkinter import *
 import configparser
 import sys
 
-lowRes = "1280x720"
-highRes = "1600x900"
+
 currentDir = os.getcwd()
 
-def SelectResolution(res):
+def ApplyConfig(res,lang):
     global acceptPhoto,searchPhoto,normalRyzePhoto,grayRyzePhoto,grayLockinPhoto,blueLockinPhoto,redBanPhoto,grayBanPhoto,runePhoto,flashPhoto,ignitePhoto,saveNormalPhoto,saveGrayPhoto,exitButtonPhoto
-    acceptPhoto = os.path.join(currentDir, "data", res, "acceptButton.png")
-    searchPhoto = os.path.join(currentDir,"data", res, "searchButton.png")
-    normalRyzePhoto = os.path.join(currentDir, "data", res, "normalRyze.png")
-    grayRyzePhoto = os.path.join(currentDir,"data", res, "grayRyze.png")
-    grayLockinPhoto = os.path.join(currentDir,"data", res, "grayLockin.png")
-    blueLockinPhoto = os.path.join(currentDir, "data", res, "blueLockin.png")
-    redBanPhoto = os.path.join(currentDir, "data", res, "redBan.png")
-    grayBanPhoto = os.path.join(currentDir,"data", res, "grayBan.png")
-    runePhoto = os.path.join(currentDir, "data", res, "runePhoto.png")
-    flashPhoto = os.path.join(currentDir, "data", res, "flashPhoto.png")
-    ignitePhoto = os.path.join(currentDir,"data", res, "ignitePhoto.png")
-    saveNormalPhoto = os.path.join(currentDir, "data", res, "saveNormal.png")
-    saveGrayPhoto = os.path.join(currentDir,"data", res, "saveGray.png")
-    exitButtonPhoto = os.path.join(currentDir,"data", res, "exitButton.png")
+    acceptPhoto = os.path.join(currentDir, "data", lang, res, "acceptButton.png")
+    searchPhoto = os.path.join(currentDir,"data", lang, res, "searchButton.png")
+    normalRyzePhoto = os.path.join(currentDir, "data", lang, res, "normalRyze.png")
+    grayRyzePhoto = os.path.join(currentDir,"data", lang, res, "grayRyze.png")
+    grayLockinPhoto = os.path.join(currentDir,"data", lang, res, "grayLockin.png")
+    blueLockinPhoto = os.path.join(currentDir, "data", lang, res, "blueLockin.png")
+    redBanPhoto = os.path.join(currentDir, "data", lang, res, "redBan.png")
+    grayBanPhoto = os.path.join(currentDir,"data", lang, res, "grayBan.png")
+    runePhoto = os.path.join(currentDir, "data", lang, res, "runePhoto.png")
+    flashPhoto = os.path.join(currentDir, "data", lang, res, "flashPhoto.png")
+    ignitePhoto = os.path.join(currentDir,"data", lang, res, "ignitePhoto.png")
+    saveNormalPhoto = os.path.join(currentDir, "data", lang, res, "saveNormal.png")
+    saveGrayPhoto = os.path.join(currentDir,"data", lang, res, "saveGray.png")
+    exitButtonPhoto = os.path.join(currentDir,"data", lang, res, "exitButton.png")
 
 icon = os.path.join(currentDir, "data", "LoLicon.ico")
 
@@ -49,14 +48,14 @@ def Status_GUI():
     status_root.resizable(False,False)
     status_root.iconbitmap(icon)
     statusText = Label(status_root,text = "Status:",font = ('Ariel', 10, 'bold'))
-    statusText.pack( ipadx = 5, ipady = 5)
+    statusText.pack( ipadx = 1, ipady = 1)
     statusLabel = Label(status_root,text = status,font = ('Ariel', 15, 'bold'))
 
 
     
-    statusLabel.pack(  ipadx = 5, ipady = 5)
+    statusLabel.pack(  ipadx = 3, ipady = 3)
     exitButton = Button(status_root, text ="Exit", command = terminate)
-    exitButton.pack(  ipadx = 5, ipady = 5)
+    exitButton.pack(  ipadx = 1, ipady = 1)
     status_root.protocol('WM_DELETE_WINDOW', terminate)
 
     def update_label():
@@ -74,7 +73,7 @@ def Status_GUI():
 def GUI_Func():
 
     pickGUI_root = tk.Tk()
-    pickGUI_root.geometry('450x250')
+    pickGUI_root.geometry('500x250')
     pickGUI_root.title('LoL Auto Pick Bot')
     pickGUI_root.resizable(False,False)
     pickGUI_root.iconbitmap(icon)
@@ -101,6 +100,11 @@ def GUI_Func():
     ban1.set('Lulu')
     ban2.set('Yuumi')
 
+    resolutions = ["1280x720","1600x900"]
+    resChoice = StringVar()
+
+    languages = ["English","Turkish"]
+    langChoice = StringVar()
 
     config = configparser.ConfigParser()		
     config.read("config.ini")
@@ -108,7 +112,7 @@ def GUI_Func():
 
     if not config.has_section("PICK"):
         config.add_section("PICK")
-        config.set("PICK", "pick1", "")
+        config.set("PICK", "pick1", "") 
         config.set("PICK", "pick2", "")
         config.set("PICK", "pick3", "")
         config.set("PICK", "pick4", "")
@@ -127,9 +131,14 @@ def GUI_Func():
         config.set("BAN", "ban3", "")
         config.set("BAN", "ban4", "")
         config.set("BAN", "ban5", "")
+
     if not config.has_section("RESOLUTION"):
         config.add_section("RESOLUTION")
         config.set("RESOLUTION", "Resolution", "1600x900")
+
+    if not config.has_section("LANGUAGES"):
+        config.add_section("LANGUAGES")
+        config.set("LANGUAGES", "Language", "English")
         
 
         
@@ -139,6 +148,9 @@ def GUI_Func():
     picks = config['PICK']
     runes = config['RUNE']
     bans = config['BAN']
+    resol = config['RESOLUTION']
+    langs = config['LANGUAGES']
+    
 
     pick1.set(picks["pick1"])
     pick2.set(picks["pick2"])
@@ -161,6 +173,8 @@ def GUI_Func():
     ban4.set(bans["ban4"])
     ban5.set(bans["ban5"])
 
+    resChoice.set(resol["Resolution"])
+    langChoice.set(langs["Language"])
     
 
     left_frame = Frame(pickGUI_root, width=200, height=200)
@@ -168,10 +182,10 @@ def GUI_Func():
 
 
     right_frame = Frame(pickGUI_root, width=200, height=200)
-    right_frame.grid(row=0, column=1, padx=10, pady=5)
+    right_frame.grid(row=0, column=1, padx=30, pady=5,sticky=E)
 
     bottom_frame = Frame(pickGUI_root, width=400, height=200)
-    bottom_frame.grid(row=1, column=1, padx=10, pady=5,sticky=E)
+    bottom_frame.grid(row=1, column=0, padx=10, pady=5)
 
     def SaveData():
         configEdit = configparser.ConfigParser()		
@@ -230,18 +244,18 @@ def GUI_Func():
             config['BAN']['ban5'] = ban5.get()
 
             config["RESOLUTION"]["Resolution"] = resChoice.get()
-            SelectResolution(resChoice.get())
-            print(resChoice.get())
-            
-            
+            config["LANGUAGES"]["Language"] = langChoice.get()
 
             config.write(configfile)
 
+        ApplyConfig(resChoice.get(),langChoice.get())
+
+        if(len(champList) == 0 or len(banList) == 0):
+            terminate()
+
         pickGUI_root.destroy()
 
-    resolutions = [lowRes,highRes]
-    resChoice = StringVar()
-    resChoice.set("1600x900")
+
         
     Label(left_frame, text="Champion Pick Preferance").grid(row=0, column=0, padx=5, pady=5)
     Label(left_frame, text="Auto Rune").grid(row=0, column=1, padx=5, pady=5)
@@ -263,8 +277,9 @@ def GUI_Func():
     Entry(right_frame, textvariable = ban4).grid(row=4, column=0, padx=5, pady=5)
     Entry(right_frame, textvariable = ban5).grid(row=5, column=0, padx=5, pady=5)
 
-    OptionMenu(bottom_frame, resChoice, *resolutions).grid(row=0, column=0, padx=5, pady=5)
-    Button(bottom_frame, text ="Confirm", command = SaveData).grid(row=0, column=1, padx=5, pady=5)
+    OptionMenu(bottom_frame, langChoice, *languages).grid(row=0, column=0, padx=5, pady=5)
+    OptionMenu(bottom_frame, resChoice, *resolutions).grid(row=0, column=1, padx=5, pady=5)
+    Button(bottom_frame, text ="Confirm", command = SaveData,font= ('Ariel', 10, 'bold')).grid(row=0, column=2, padx=5, pady=5)
     pickGUI_root.protocol('WM_DELETE_WINDOW', terminate)
 
     pickGUI_root.mainloop()
@@ -274,7 +289,7 @@ def AcceptGameListener():
     
     global stopSignal
     
-    acceptLocation = pyautogui.locateCenterOnScreen(acceptPhoto, confidence= 0.7)
+    acceptLocation = pyautogui.locateCenterOnScreen(acceptPhoto, confidence= 0.8)
     stopSignal = False
 
     if(acceptLocation) != None:
@@ -305,7 +320,7 @@ def GetPickLocationListener():
     if(stopSignal):
         sys.exit()
 
-    searchLocation = pyautogui.locateCenterOnScreen(searchPhoto, confidence= 0.7)
+    searchLocation = pyautogui.locateCenterOnScreen(searchPhoto, confidence= 0.8)
 
     if searchLocation != None:
         global status
@@ -316,8 +331,8 @@ def GetPickLocationListener():
         time.sleep(0.2)
         pyautogui.typewrite("ryze")
         time.sleep(1)
-        pickLocation = pyautogui.locateCenterOnScreen(grayRyzePhoto, confidence= 0.7)
-        pickLocation = pyautogui.locateCenterOnScreen(normalRyzePhoto, confidence= 0.7)
+        pickLocation = pyautogui.locateCenterOnScreen(grayRyzePhoto, confidence= 0.8)
+        pickLocation = pyautogui.locateCenterOnScreen(normalRyzePhoto, confidence= 0.8)
         if(pickLocation != None ):
             threading.Thread(target=DeclareIntent,args=(pickLocation,searchLocation),name="DeclareIntent_and_Ban_Thread").start()
         else:
@@ -382,7 +397,7 @@ def ChampBanListener(pickLoc,searchLoc,banIterate):
         if(banLoc != None):
             pyautogui.moveTo(banLoc)
             pyautogui.click()
-            time.sleep(1.5)
+            time.sleep(2.5)
             pyautogui.moveTo(searchLoc) #to move mouse away from image
             if((pyautogui.locateCenterOnScreen(redBanPhoto, confidence= 0.8) != None) or (pyautogui.locateCenterOnScreen(grayBanPhoto, confidence= 0.8) != None )):
                 banIterate+=1
@@ -412,6 +427,7 @@ def ChampSelectListener(pickLoc,searchLoc,champIterate,delayFlag):
     if((pyautogui.locateCenterOnScreen(blueLockinPhoto, confidence= 0.8) != None) or (pyautogui.locateCenterOnScreen(grayLockinPhoto, confidence= 0.8) != None )):
         global status
         status = "Selecting Champion"
+        time.sleep(1)
         pyautogui.moveTo(searchLoc)
         pyautogui.click()
         time.sleep(0.2)
@@ -428,7 +444,7 @@ def ChampSelectListener(pickLoc,searchLoc,champIterate,delayFlag):
         if(lockinLoc != None):
             pyautogui.moveTo(lockinLoc)
             pyautogui.click()
-            time.sleep(2)
+            time.sleep(1)
             pyautogui.moveTo(searchLoc) #to move mouse away from image
             if((pyautogui.locateCenterOnScreen(blueLockinPhoto, confidence= 0.8) != None) or (pyautogui.locateCenterOnScreen(grayLockinPhoto, confidence= 0.8) != None )):
                 champIterate+=1
@@ -453,7 +469,7 @@ def AutoRuneFunc():
     if(stopSignal):
         sys.exit()
 
-    runPhotoLoc = pyautogui.locateCenterOnScreen(runePhoto, confidence= 0.7)
+    runPhotoLoc = pyautogui.locateCenterOnScreen(runePhoto, confidence= 0.8)
 
 
     if(runPhotoLoc != None):
@@ -463,8 +479,8 @@ def AutoRuneFunc():
         pyautogui.click()
         time.sleep(2)
         
-        flashPhotoLoc = pyautogui.locateCenterOnScreen(flashPhoto, confidence= 0.7)
-        ignitePhotoLoc = pyautogui.locateCenterOnScreen(ignitePhoto, confidence= 0.7)
+        flashPhotoLoc = pyautogui.locateCenterOnScreen(flashPhoto, confidence= 0.8)
+        ignitePhotoLoc = pyautogui.locateCenterOnScreen(ignitePhoto, confidence= 0.8)
         chooseRuneLoc = None
 
         if flashPhotoLoc != None:
@@ -478,8 +494,8 @@ def AutoRuneFunc():
             pyautogui.click()
             time.sleep(2)
 
-            saveNormalPhotoLoc = pyautogui.locateCenterOnScreen(saveNormalPhoto, confidence= 0.7)
-            saveGrayPhotoLoc = pyautogui.locateCenterOnScreen(saveGrayPhoto, confidence= 0.7)
+            saveNormalPhotoLoc = pyautogui.locateCenterOnScreen(saveNormalPhoto, confidence= 0.8)
+            saveGrayPhotoLoc = pyautogui.locateCenterOnScreen(saveGrayPhoto, confidence= 0.8)
             saveLoc = None
 
             if saveNormalPhotoLoc != None:
@@ -497,7 +513,7 @@ def AutoRuneFunc():
                     pyautogui.click()
                     sys.exit()
 
-SelectResolution("1600x900")
+ApplyConfig("1600x900","English")
 GUI_Func()
 threading.Thread(target=Status_GUI,name="Status_GUI_Thread").start()
 threading.Thread(target=AcceptGameListener ,name="AcceptGameListener_Thread").start()
