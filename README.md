@@ -11,7 +11,7 @@ This software is not affiliated, associated, authorized, endorsed by, or in any 
 - Enjoy your free time when you are not waiting in front of the screen
 
 ## Important Notes
-- Since program is pixel based you require to use **1600x900** or **1280x720** client window size and **ENGLISH** client
+- Since program is pixel based you require to use **1600x900** or **1280x720** client window size and **ENGLISH** or **TURKISH** client
 - While the bot is running do not left your mouse where accept button will appear (I could implement the bot so that it always moves the mouse out of that range, I didn't want to move the mouse constantly)
 - Beware of autofill
 
