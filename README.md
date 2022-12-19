@@ -12,6 +12,7 @@ This software is not affiliated, associated, authorized, endorsed by, or in any 
 - Enter up to 5 champion to pick
 - Select if you want auto rune feature
 - Enter up to 5 champion to ban
+- Bot automatically accepts the match, picks and bans according to your preferences.
 - Ability to restart itself if dodged while in champion selection screen
 - Enjoy your free time when you are not waiting in front of the screen
 
