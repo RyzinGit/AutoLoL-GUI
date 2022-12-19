@@ -25,4 +25,4 @@ LoLAutoPickBot is non-API based automation software for League of Legends.
 - Beware of autofill
 
 ## Disclaimer
-#### This software is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the Riot Games, or any of its subsidiaries or its affiliates.
+This software is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the Riot Games, or any of its subsidiaries or its affiliates.
