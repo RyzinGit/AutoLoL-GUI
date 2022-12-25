@@ -432,6 +432,7 @@ def DeclareIntent(pickLoc,searchLoc):
     time.sleep(1)
     if(len(banList) > 0):
         threading.Thread(target=ChampBanHandler,args=(pickLoc,searchLoc,0),name="ChampBanHandler_Thread").start()
+        threading.Thread(target=ChampSelectHandler,args=(pickLoc,searchLoc,0),name="ChampSelectHandler_Thread").start()
     else:
         threading.Thread(target=ChampSelectHandler,args=(pickLoc,searchLoc,0),name="ChampSelectHandler_Thread").start()
 
