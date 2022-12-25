@@ -281,7 +281,7 @@ def GUI_Func():
     s = ttk.Style()
     s.configure('TButton', font=('Ariel',10 ,'bold'))
         
-    ttk.Label(left_frame, text="Champion Pick Preferance").grid(row=0, column=1, padx=5, pady=5)
+    ttk.Label(left_frame, text="Champion Pick Preference").grid(row=0, column=1, padx=5, pady=5)
     ttk.Label(left_frame, text="1.").grid(row=1, column=0, padx=5, pady=5)
     ttk.Label(left_frame, text="2.").grid(row=2, column=0, padx=5, pady=5)
     ttk.Label(left_frame, text="3.").grid(row=3, column=0, padx=5, pady=5)
@@ -299,7 +299,7 @@ def GUI_Func():
     ttk.Checkbutton(left_frame, variable = runeFlag4, onvalue = 1, offvalue = 0).grid(row=4, column=2, padx=5, pady=0)
     ttk.Checkbutton(left_frame, variable = runeFlag5, onvalue = 1, offvalue = 0).grid(row=5, column=2, padx=5, pady=0)
 
-    ttk.Label(right_frame, text="Champion Ban Preferance").grid(row=0, column=0, padx=5, pady=5)
+    ttk.Label(right_frame, text="Champion Ban Preference").grid(row=0, column=0, padx=5, pady=5)
     ttk.Entry(right_frame, textvariable = ban1).grid(row=1, column=0, padx=5, pady=5)
     ttk.Entry(right_frame, textvariable = ban2).grid(row=2, column=0, padx=5, pady=5)
     ttk.Entry(right_frame, textvariable = ban3).grid(row=3, column=0, padx=5, pady=5)
