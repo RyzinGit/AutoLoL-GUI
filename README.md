@@ -1,5 +1,7 @@
 # AutoLoL-GUI
 AutoLoL-GUI is non-API based automation software for League of Legends.
+
+Bot will handle the match acceptance and champion selection process for you, even restarting itself if necessary, so you can take a break and let the bot handle everything while you relax.
 ##
 ![Screenshot1](app1.png)
 
