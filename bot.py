@@ -91,7 +91,7 @@ def GUI_Func():
 
     pickGUI_root = tk.Tk()
     pickGUI_root.geometry('500x400')
-    pickGUI_root.title('LoL Auto Pick Bot')
+    pickGUI_root.title('AutoLoL-GUI')
     pickGUI_root.resizable(False,False)
     pickGUI_root.iconbitmap(icon)
     pickGUI_root.tk.call("source", "data\\azure.tcl")
