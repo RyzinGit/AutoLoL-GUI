@@ -14,6 +14,7 @@ Bot will handle the match acceptance and champion selection process for you, eve
 - Enter up to 5 champion to ban
 - Bot automatically accepts the match, picks and bans according to your preferences.
 - Ability to restart itself if dodged while in champion selection screen
+- This bot is designed to not interfere with game files or provide any in-game advantage to the user, ensuring that there is **no risk of ban**. You can use the bot with confidence, knowing that it will not compromise the integrity of the game or your account.
 - **Enjoy your free time without waiting in front of the screen**
 
 ##
