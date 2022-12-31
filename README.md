@@ -1,5 +1,5 @@
-# LoLAutoPickBot
-LoLAutoPickBot is non-API based automation software for League of Legends.
+# AutoLoL-GUI
+AutoLoL-GUI is non-API based automation software for League of Legends.
 ##
 ![Screenshot1](app1.png)
 
