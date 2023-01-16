@@ -24,7 +24,8 @@ Bot will handle the match acceptance and champion selection process for you, eve
 
 ## Important Notes
 - Since program is pixel based you require to use **1600x900** or **1280x720** client window size and **ENGLISH** or **TURKISH** client
-- While the bot is running do not left your mouse where accept button will appear (I didn't find it right to keep the mouse fixed at the edges of the screen all the time.)
+- Avoid moving the mouse cursor to the corners of the screen. This is because the Pyautogui library, which is used in the program, may throw an exception if the cursor is placed in certain areas of the screen.
+- Avoid leaving the mouse cursor where the accept button will appear while searching for a match, as this may cause the program to not recognize the button.
 - Beware of autofill
 
 ## Disclaimer
