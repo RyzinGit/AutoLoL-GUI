@@ -7,7 +7,8 @@ from tkinter import ttk
 from tkinter import *
 import configparser
 import sys
-
+import ctypes
+import ctypes.wintypes
 
 currentDir = os.getcwd()
 
@@ -36,10 +37,26 @@ pickList = []
 autoRuneList = []
 banList = []
 stopSignal = False
+pyautogui.FAILSAFE = False
 
 
 def terminate():
     os._exit(0)
+
+def CheckDisplayScale():
+    
+    handleDeviceContext = ctypes.windll.user32.GetDC(None)
+    dpi = ctypes.windll.gdi32.GetDeviceCaps(handleDeviceContext, 88)
+    ctypes.windll.user32.ReleaseDC(None, handleDeviceContext)
+
+    if (dpi != 96):
+        
+        title = "Display Scale Error"
+        message = "Your display scale setting is not set to 100%.\n\nRunning the program with a display scale other than 100% may cause issues with the program's functionality and display.\n\nPlease set your display scale to 100% by following these steps: \n1. Right-click on an empty space on your desktop. \n2. Click on Display settings. \n3. Under Scale and layout, you will find the option to change the display scale. \n4. Change the scale to 100% and click on Apply."
+        response = ctypes.windll.user32.MessageBoxW(None, message, title, 0x10 | 0x4)
+
+        if(response == 6):
+            terminate()
 
 def Status_GUI():
     
@@ -272,6 +289,10 @@ def GUI_Func():
         ApplyConfig(resChoice.get(),langChoice.get())
 
         if(len(pickList) == 0):
+            
+            title = "Pick List Error"
+            message = "Please select at least one champion before proceeding.\n\nPick list cannot be empty."
+            ctypes.windll.user32.MessageBoxW(None, message, title, 0x10 | 0x0)
             terminate()
 
         pickGUI_root.destroy()
@@ -588,6 +609,7 @@ def AutoRuneFunc():
                     sys.exit()
 
 ApplyConfig("1600x900","English")
+CheckDisplayScale()
 GUI_Func()
 threading.Thread(target=Status_GUI,name="Status_GUI_Thread").start()
 threading.Thread(target=AcceptGameListener ,name="AcceptGameListener_Thread").start()
