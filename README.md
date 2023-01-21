@@ -21,11 +21,11 @@ Bot will handle the match acceptance and champion selection process for you, eve
 ## Important Notes
 - Since program is pixel based you require to use **1600x900** or **1280x720** client window size and **ENGLISH** or **TURKISH** client
 - Beware of autofill
+- If the system setting display scale is not set to 100%, the program will display an error message and instructions on how to change the setting.
+- Windows is required
 
 ## Known Issues
-- Avoid moving the mouse cursor to the corners of the screen. This is because the Pyautogui library, which is used in the program, may throw an exception if the cursor is placed in certain areas of the screen.
 - Avoid leaving the mouse cursor where the accept button will appear while searching for a match, as this may cause the program to not recognize the button.
-- If the system setting display scale is not set to 100%, the program may not function properly (this bug usually happens on laptops).
 
 ## What could be implemented
 - Push notification to phone
