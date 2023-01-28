@@ -7,9 +7,6 @@ Bot will handle the match acceptance and champion selection process for you, eve
 
 ![Screenshot2](app2.png)
 
-![Screenshot2](approval.png)
-##
-
 ## Features
 - Enter up to 5 champion to pick
 
