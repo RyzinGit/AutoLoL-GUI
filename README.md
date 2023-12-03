@@ -36,6 +36,7 @@ Bot will handle the match acceptance and champion selection process for you, eve
 
 ## Known Issues
 - Avoid leaving the mouse cursor where the accept button will appear while searching for a match, as this may cause the program to not recognize the button.
+- If autofilled as jungler, the pop-up that appears prevents the bot from working properly.
 
 ## What could be implemented
 - Push notification to phone
